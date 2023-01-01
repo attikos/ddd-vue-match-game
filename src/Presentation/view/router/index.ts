@@ -1,4 +1,4 @@
-import PageHome from '@/Presentation/view/components/PageHome.vue';
+import PageHome from '@/Presentation/view/pages/PageHome.vue';
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 export const createAppRouter = () => {
