@@ -3,16 +3,16 @@ import type { CardState } from '@/Domain/Card';
 
 export const useCardStore = defineStore('card', {
     state: (): CardState => ({
-        cardImageUrls : [],
+        cardImagesAsset : [],
         currentCards : [],
     }),
 
     actions: {
         setCurrentCards(urls: string[]) {
-            this.currentCards = urls;
+            this.$patch({currentCards : urls});
         },
-        setCardImageUrls(urls: string[]) {
-            this.cardImageUrls = urls;
+        setCardImagesAsset(urls: string[]) {
+            this.$patch({cardImagesAsset : urls});
         }
     }
 });

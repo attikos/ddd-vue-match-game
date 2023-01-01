@@ -4,15 +4,15 @@ import { storeToRefs } from 'pinia';
 import type { Ref } from 'vue';
 
 export interface CardPresenter {
-    cardImageUrls: Ref<string[]>
+    cardImagesAsset: Ref<string[]>
     currentCards: Ref<string[]>
 }
 
 export function CardPresenter(): CardPresenter {
-    const { cardImageUrls, currentCards } = storeToRefs(useCardStore());
+    const { cardImagesAsset, currentCards } = storeToRefs(useCardStore());
 
     return {
-        cardImageUrls,
-        currentCards
+        cardImagesAsset,
+        currentCards,
     };
 }

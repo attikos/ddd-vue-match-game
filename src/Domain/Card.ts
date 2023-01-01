@@ -10,6 +10,6 @@ export const cardImagesAsset = [
 ];
 
 export interface CardState {
-    cardImageUrls: string[]
+    cardImagesAsset: string[]
     currentCards: string[]
 }

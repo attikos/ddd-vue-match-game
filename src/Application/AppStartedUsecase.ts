@@ -8,11 +8,9 @@ export class AppStartedUsecase implements Usecase {
     ) {}
 
     async execute(): Promise<void> {
-        console.log('app started');
+        this.cardRepository.setCardImagesAsset(this.cardImagesAsset);
 
-        this.cardRepository.setCardImageUrls(this.cardImagesAsset);
-
-        const randomCards = [...this.cardImagesAsset].sort(() => (Math.random() > 0.5) ? 1 : -1);
-        this.cardRepository.setCurrentCards(randomCards)
+        // const randomCards = [...this.cardImagesAsset, ...this.cardImagesAsset].sort(() => (Math.random() > 0.5) ? 1 : -1);
+        // this.cardRepository.setCurrentCards(randomCards)
     }
 }

@@ -15,7 +15,7 @@ export class CardRepository {
         this.store.setCurrentCards(cards);
     }
 
-    setCardImageUrls(cards: string[]) {
-        this.store.setCardImageUrls(cards);
+    setCardImagesAsset(cards: string[]) {
+        this.store.setCardImagesAsset(cards);
     }
 }
