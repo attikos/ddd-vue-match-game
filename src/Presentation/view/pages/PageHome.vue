@@ -1,18 +1,14 @@
 <script setup lang="ts">
+import { CardPresenter } from '@/Presentation/presenter/CardPresenter';
 import { getImageUrl } from '@/Presentation/view/utils/get-image-url';
+import { computed } from 'vue';
 
-const cardImageUrls = [
-    '01.jpg',
-    '02.jpg',
-    '03.jpg',
-    '04.jpg',
-    '05.jpg',
-    '06.jpg',
-    '07.jpg',
-    '08.jpg',
-];
 
-const cardImages = cardImageUrls.map(img => getImageUrl(img, '../assets/card/'));
+const cardPresenter = CardPresenter() || {};
+// const cardPresenter = computed(() => CardPresenter());
+
+
+const cardImages = cardPresenter.currentCards.value.map(img => getImageUrl(img));
 
 </script>
 
