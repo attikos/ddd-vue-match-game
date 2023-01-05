@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { CardPresenter } from '@/Presentation/presenter/CardPresenter';
-import { startGameUsecaseMap } from '@/Presentation/usecaseMap';
+import { mapUsecase } from '@/Presentation/usecaseMap';
+import GameCard from '@/Presentation/view/components/GameCard.vue';
 import { getImageUrl } from '@/Presentation/view/utils/get-image-url';
 import { computed, ref, onMounted } from 'vue';
 
@@ -9,15 +10,17 @@ const cardImages = computed(() => cardPresenter.currentCards.value.map(img => ge
 
 const showedCards = ref<Record<number, boolean>>({});
 
-const START_GAME_DELAY_ANIMATION = 500;
+const START_GAME_ANIMATION_DELAY = 500;
+
+const startGameUsecase = mapUsecase('StartGameUsecase');
 
 const startHandler = () => {
     showedCards.value = {};
 
-    setTimeout(() => startGameUsecaseMap(), START_GAME_DELAY_ANIMATION)
+    setTimeout(() => startGameUsecase(), START_GAME_ANIMATION_DELAY)
 }
 
-const checkShowCard = (index: number): boolean => {
+const checkIsShowedCard = (index: number): boolean => {
     return !!showedCards.value[index];
 }
 
@@ -39,26 +42,35 @@ onMounted(() => {
         </header>
 
         <div class="wrapper">
-            <div
+            <!-- <div
                 v-for="(image, index) of cardImages"
                 class="card-parent"
                 :key="index"
             >
                 <div
                     class="card-wrapper"
-                    :class="{ 'card-wrapper--flipped' : checkShowCard(index) }"
+                    :class="{ 'card-wrapper--flipped' : checkIsShowedCard(index) }"
                     @click="openCard(index)"
                 >
                     <div class="card card__back"></div>
 
                     <img
-                        v-if="checkShowCard(index)"
+                        v-if="checkIsShowedCard(index)"
                         :src="image"
                         alt=""
                         class="card card__front"
                     />
                 </div>
-            </div>
+            </div> -->
+
+            <GameCard
+                v-for="(image, index) of cardImages"
+                @open-card="openCard(index)"
+                :isFlipped="checkIsShowedCard(index)"
+                :isShowed="checkIsShowedCard(index)"
+                :image="image"
+                :key="index"
+            ></GameCard>
         </div>
     </div>
 </template>
@@ -70,63 +82,5 @@ onMounted(() => {
     justify-content: flex-start;
     flex-wrap: wrap;
     margin: auto;
-}
-
-.card-parent {
-    perspective: 500px;
-}
-
-.card-wrapper {
-    position: relative;
-    display: flex;
-    margin: 6px;
-    cursor: pointer;
-    height: 70px;
-    width: 114px;
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
-    flex: 1;
-    box-sizing: border-box;
-
-    &--flipped {
-        transform: rotateY(180deg);
-    }
-}
-
-.card {
-    border-radius: 10px;
-    height: 70px;
-    width: 114px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    &__front {
-        background: #fff;
-        transform: rotateY(180deg);
-    }
-
-    &__back {
-        background-color:#05d0d0;
-        background-image:
-        repeating-linear-gradient(
-            45deg,
-            rgba(0,0,0,0.8),
-            rgba(0,0,0,0.8) 10px,
-            transparent 0px,
-            transparent 20px
-        ),
-        repeating-linear-gradient(
-            -45deg,
-            rgba(0,0,0,0.5),
-            rgba(0,0,0,0.5) 10px,
-            transparent 0px,
-            transparent 20px
-        );
-    }
 }
 </style>

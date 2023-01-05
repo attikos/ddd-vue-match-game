@@ -13,3 +13,7 @@ export interface CardState {
     cardImagesAsset: string[]
     currentCards: string[]
 }
+
+export const openCard = (index: number, currentCards: string[], openedCards: any): void => {
+    openedCards[index] = true;
+}

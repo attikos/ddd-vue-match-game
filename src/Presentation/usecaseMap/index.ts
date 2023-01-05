@@ -3,19 +3,25 @@ import { cardImagesAsset } from '@/Domain/Card';
 import { AppStartedUsecase } from '@/Application/AppStartedUsecase';
 import { StartGameUsecase } from '@/Application/StartGameUsecase';
 
-export const appStartedUsecaseMap = () => {
-    const usecase = new AppStartedUsecase(
-        new CardRepository(),
-        cardImagesAsset,
-    );
+const usecaseMap = {
+    AppStartedUsecase: (): Promise<void> => {
+        const usecase = new AppStartedUsecase(
+            new CardRepository(),
+            cardImagesAsset,
+        );
 
-    return usecase.execute();
-};
+        return usecase.execute();
+    },
 
-export const startGameUsecaseMap = () => {
-    const usecase = new StartGameUsecase(
-        new CardRepository()
-    );
+    StartGameUsecase: (): Promise<void> => {
+        const usecase = new StartGameUsecase(
+            new CardRepository()
+        );
 
-    return usecase.execute();
+        return usecase.execute();
+    }
+}
+
+export const mapUsecase = (usecase: keyof typeof usecaseMap) => {
+    return usecaseMap[usecase];
 };
