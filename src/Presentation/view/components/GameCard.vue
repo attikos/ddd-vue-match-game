@@ -46,6 +46,8 @@ const props = defineProps({
 
     &--flipped {
         transform: rotateY(180deg);
+        cursor: default;
+        pointer-events: none;
     }
 }
 

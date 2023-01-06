@@ -5,12 +5,22 @@ import GameCard from '@/Presentation/view/components/GameCard.vue';
 import { getImageUrl } from '@/Presentation/view/utils/get-image-url';
 import { computed, ref, onMounted } from 'vue';
 
-const cardPresenter = CardPresenter();
-const cardImages = computed(() => cardPresenter.currentCards.value.map(img => getImageUrl(img)));
+interface ShowedCards {
+    [key: number]: boolean
+}
 
-const showedCards = ref<Record<number, boolean>>({});
+interface PairCardAttemp {
+    index: number
+    id: string
+}
+
+const showedCards = ref<ShowedCards>({});
+const cardPresenter = CardPresenter();
+const currentCards = cardPresenter.currentCards;
+const cardImages = computed(() => currentCards.value.map(img => getImageUrl(img)));
 
 const START_GAME_ANIMATION_DELAY = 500;
+const DELAY_TO_CLOSE = 1000;
 
 const startGameUsecase = mapUsecase('StartGameUsecase');
 
@@ -24,8 +34,60 @@ const checkIsShowedCard = (index: number): boolean => {
     return !!showedCards.value[index];
 }
 
+function checkPairCards(pairCardAttemp: [PairCardAttemp?, PairCardAttemp?]): boolean {
+    return pairCardAttemp[0]?.id === pairCardAttemp[1]?.id;
+}
+
+const pairCardAttemp = ref<[PairCardAttemp?, PairCardAttemp?]>([]);
+
+function closeAttempsCards(pairCards: typeof pairCardAttemp, showedCardList: typeof showedCards) {
+    pairCards.value.forEach(card => {
+        if (card) {
+            delete showedCardList.value[card.index];
+        }
+    })
+}
+
+function resetPairAttemps(attemps: typeof pairCardAttemp) {
+    attemps.value = [];
+}
+
+function checkIsFinish(showedCardList: typeof showedCards) {
+    if (Object.keys(showedCardList.value).length === currentCards.value.length) {
+        alert('You win!')
+    }
+}
+
 const openCard = (index: number): void => {
+    if (checkIsShowedCard(index)) {
+        console.log('opened');
+
+        return;
+    }
+
+    if (pairCardAttemp.value.length >= 2) {
+        return;
+    }
+
+    pairCardAttemp.value.push({
+        index,
+        id: currentCards.value[index]
+    });
+
     showedCards.value = { ...showedCards.value, [index] : true };
+
+    if (pairCardAttemp.value.length === 2) {
+        setTimeout(() => {
+            if (!checkPairCards(pairCardAttemp.value)) {
+                closeAttempsCards(pairCardAttemp, showedCards);
+            }
+            else {
+                checkIsFinish(showedCards);
+            }
+
+            resetPairAttemps(pairCardAttemp);
+        }, DELAY_TO_CLOSE);
+    }
 }
 
 onMounted(() => {
