@@ -49,6 +49,12 @@ const props = defineProps({
         cursor: default;
         pointer-events: none;
     }
+
+    &:hover {
+        > .card__back {
+            box-shadow: 0 0 0px 2px rgba(0, 100, 180, 0.5);
+        }
+    }
 }
 
 .card {
@@ -69,7 +75,7 @@ const props = defineProps({
     }
 
     &__back {
-        background-color:#05d0d0;
+        background-color: var(--secondary-color);
         background-image:
         repeating-linear-gradient(
             45deg,
@@ -85,6 +91,7 @@ const props = defineProps({
             transparent 0px,
             transparent 20px
         );
+        transition: background-color 0.3s ease-in;
     }
 }
 </style>

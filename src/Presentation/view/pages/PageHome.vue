@@ -1,46 +1,29 @@
 <script setup lang="ts">
+import type { PairCardAttemps, ShowedCards } from '@/Domain/Card';
 import { CardPresenter } from '@/Presentation/presenter/CardPresenter';
-import { mapUsecase } from '@/Presentation/usecaseMap';
+import AppHeader from '@/Presentation/view/components/AppHeader.vue';
 import GameCard from '@/Presentation/view/components/GameCard.vue';
 import { getImageUrl } from '@/Presentation/view/utils/get-image-url';
-import { computed, ref, onMounted } from 'vue';
-
-interface ShowedCards {
-    [key: number]: boolean
-}
-
-interface PairCardAttemp {
-    index: number
-    id: string
-}
+import { computed, ref, type Ref } from 'vue';
 
 const showedCards = ref<ShowedCards>({});
+const pairCardAttemps = ref<PairCardAttemps>([]);
+
 const cardPresenter = CardPresenter();
 const currentCards = cardPresenter.currentCards;
 const cardImages = computed(() => currentCards.value.map(img => getImageUrl(img)));
 
-const START_GAME_ANIMATION_DELAY = 500;
 const DELAY_TO_CLOSE = 1000;
-
-const startGameUsecase = mapUsecase('StartGameUsecase');
-
-const startHandler = () => {
-    showedCards.value = {};
-
-    setTimeout(() => startGameUsecase(), START_GAME_ANIMATION_DELAY)
-}
 
 const checkIsShowedCard = (index: number): boolean => {
     return !!showedCards.value[index];
 }
 
-function checkPairCards(pairCardAttemp: [PairCardAttemp?, PairCardAttemp?]): boolean {
+function checkPairCards(pairCardAttemp: PairCardAttemps): boolean {
     return pairCardAttemp[0]?.id === pairCardAttemp[1]?.id;
 }
 
-const pairCardAttemp = ref<[PairCardAttemp?, PairCardAttemp?]>([]);
-
-function closeAttempsCards(pairCards: typeof pairCardAttemp, showedCardList: typeof showedCards) {
+function closeAttempsCards(pairCards: typeof pairCardAttemps, showedCardList: typeof showedCards) {
     pairCards.value.forEach(card => {
         if (card) {
             delete showedCardList.value[card.index];
@@ -48,7 +31,7 @@ function closeAttempsCards(pairCards: typeof pairCardAttemp, showedCardList: typ
     })
 }
 
-function resetPairAttemps(attemps: typeof pairCardAttemp) {
+function resetPairAttemps(attemps: Ref<PairCardAttemps>) {
     attemps.value = [];
 }
 
@@ -65,66 +48,37 @@ const openCard = (index: number): void => {
         return;
     }
 
-    if (pairCardAttemp.value.length >= 2) {
+    if (pairCardAttemps.value.length >= 2) {
         return;
     }
 
-    pairCardAttemp.value.push({
+    pairCardAttemps.value.push({
         index,
         id: currentCards.value[index]
     });
 
     showedCards.value = { ...showedCards.value, [index] : true };
 
-    if (pairCardAttemp.value.length === 2) {
+    if (pairCardAttemps.value.length === 2) {
         setTimeout(() => {
-            if (!checkPairCards(pairCardAttemp.value)) {
-                closeAttempsCards(pairCardAttemp, showedCards);
+            if (!checkPairCards(pairCardAttemps.value)) {
+                closeAttempsCards(pairCardAttemps, showedCards);
             }
             else {
                 checkIsFinish(showedCards);
             }
 
-            resetPairAttemps(pairCardAttemp);
+            resetPairAttemps(pairCardAttemps);
         }, DELAY_TO_CLOSE);
     }
 }
-
-onMounted(() => {
-    startHandler();
-});
 </script>
 
 <template>
     <div>
-        <header>
-            <h2>Match Match Game</h2>
+        <AppHeader></AppHeader>
 
-            <a href="/start" @click.prevent="startHandler">Start</a>
-        </header>
-
-        <div class="wrapper">
-            <!-- <div
-                v-for="(image, index) of cardImages"
-                class="card-parent"
-                :key="index"
-            >
-                <div
-                    class="card-wrapper"
-                    :class="{ 'card-wrapper--flipped' : checkIsShowedCard(index) }"
-                    @click="openCard(index)"
-                >
-                    <div class="card card__back"></div>
-
-                    <img
-                        v-if="checkIsShowedCard(index)"
-                        :src="image"
-                        alt=""
-                        class="card card__front"
-                    />
-                </div>
-            </div> -->
-
+        <div class="game-content">
             <GameCard
                 v-for="(image, index) of cardImages"
                 @open-card="openCard(index)"
@@ -137,12 +91,12 @@ onMounted(() => {
     </div>
 </template>
 
-<style scoped lang="scss">
-.wrapper {
+<style lang="scss">
+.game-content {
     display: flex;
     max-width: 506px;
     justify-content: flex-start;
     flex-wrap: wrap;
-    margin: auto;
+    margin: 24px auto;
 }
 </style>

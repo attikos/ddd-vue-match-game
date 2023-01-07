@@ -9,9 +9,22 @@ export const cardImagesAsset = [
     'card/08.jpg',
 ];
 
+export interface PairCardAttemp {
+    index: number
+    id: string
+}
+
+export type PairCardAttemps = [PairCardAttemp?, PairCardAttemp?];
+
+export interface ShowedCards {
+    [key: number]: boolean
+}
+
 export interface CardState {
     cardImagesAsset: string[]
     currentCards: string[]
+    showedCards: ShowedCards
+    pairCardAttemps: PairCardAttemps
 }
 
 export const openCard = (index: number, currentCards: string[], openedCards: any): void => {

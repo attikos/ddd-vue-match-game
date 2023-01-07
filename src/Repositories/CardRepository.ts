@@ -1,4 +1,5 @@
 import { useCardStore } from '@/Data/card.store';
+import type { ShowedCards } from '@/Domain/Card';
 
 export class CardRepository {
     private _store: ReturnType<typeof useCardStore>;
@@ -17,5 +18,13 @@ export class CardRepository {
 
     setCardImagesAsset(cards: string[]) {
         this.store.setCardImagesAsset(cards);
+    }
+
+    setShowedCards(cards: ShowedCards) {
+        this.store.setShowedCards(cards);
+    }
+
+    resetShowedCards() {
+        this.store.setShowedCards({});
     }
 }
