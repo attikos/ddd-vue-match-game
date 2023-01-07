@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { ref, watch } from 'vue';
+
 const emit = defineEmits(['openCard'])
 
 const props = defineProps({
@@ -6,6 +8,20 @@ const props = defineProps({
     isFlipped: Boolean,
     isShowed: Boolean
 })
+
+const isShowedDelayed = ref<boolean>(false);
+
+// Fix an animation bug of closing cards
+watch(() => props.isShowed, (val, oldVal) => {
+    if (val && !oldVal) {
+        isShowedDelayed.value = true;
+    }
+    else if (!val && oldVal) {
+        setTimeout(() => {
+            isShowedDelayed.value = false;
+        }, 500);
+    }
+});
 </script>
 
 <template>
@@ -18,7 +34,7 @@ const props = defineProps({
             <div class="card card__back"></div>
 
             <img
-                v-if="props.isShowed"
+                v-if="isShowedDelayed"
                 :src="props.image"
                 alt=""
                 class="card card__front"

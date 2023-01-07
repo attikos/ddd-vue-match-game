@@ -42,9 +42,8 @@ function checkIsFinish(showedCardList: typeof showedCards) {
 }
 
 const openCard = (index: number): void => {
+    // opened
     if (checkIsShowedCard(index)) {
-        console.log('opened');
-
         return;
     }
 
