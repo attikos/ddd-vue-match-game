@@ -11,13 +11,16 @@ export class StartGameUsecase implements Usecase {
     ) {}
 
     async execute(): Promise<void> {
+        const START_GAME_ANIMATION_DELAY = 300;
         const cardImageAsset = this.cardRepository.store.cardImageAsset;
 
         this.cardRepository.resetShowedCards();
         this.cardRepository.resetPairCardAttempList();
         this.gameRepository.setGameStatus(GameStatus.inProgress);
 
-        const randomCards = getRandomGameCards(cardImageAsset);
-        this.cardRepository.setCurrentCards(randomCards);
+        setTimeout(() => {
+            const randomCards = getRandomGameCards(cardImageAsset);
+            this.cardRepository.setCurrentCards(randomCards);
+        }, START_GAME_ANIMATION_DELAY)
     }
 }

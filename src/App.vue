@@ -34,4 +34,23 @@ body {
     padding: 0;
     margin: 0;
 }
+
+.btn {
+    color: #fff;
+    background: var(--primary-color);
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #999;
+    display: inline-block;
+    min-width: 96px;
+
+    &:hover {
+        color: #ddd;
+    }
+
+    &:active {
+        color: #ccc;
+    }
+}
 </style>

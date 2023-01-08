@@ -4,9 +4,10 @@ import { CardPresenter } from '@/Presentation/presenter/CardPresenter';
 import { ShowedCardsPresenter } from '@/Presentation/presenter/ShowedCardsPresenter';
 import { mapUsecase } from '@/Presentation/usecaseMap';
 import AppHeader from '@/Presentation/view/components/AppHeader.vue';
+import AppModal from '@/Presentation/view/components/AppModal.vue';
 import GameCard from '@/Presentation/view/components/GameCard.vue';
 import { getImageUrl } from '@/Presentation/view/utils/get-image-url';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const cardPresenter = CardPresenter();
 const showedCards = ShowedCardsPresenter();
@@ -19,8 +20,14 @@ const checkIsShowedCard = (index: number): boolean => {
     return _checkIsShowedCard(showedCards.value, index);
 }
 
+const isShowModal = ref(false);
+
+function showWonNotification() {
+    isShowModal.value = true;
+}
+
 function openCardHandler(index: number) {
-    openCardUsecase(index);
+    openCardUsecase(index, showWonNotification);
 }
 </script>
 
@@ -35,8 +42,10 @@ function openCardHandler(index: number) {
                 :isFlipped="checkIsShowedCard(index)"
                 :isShowed="checkIsShowedCard(index)"
                 :image="image"
-                :key="index"
+                :key="index + image"
             ></GameCard>
+
+            <AppModal title="You won!" :isShow="isShowModal" @closed="isShowModal = false"></AppModal>
         </div>
     </div>
 </template>

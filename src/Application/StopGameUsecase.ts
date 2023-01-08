@@ -14,8 +14,8 @@ export class StopGameUsecase implements Usecase {
             return;
         }
 
-        this.cardRepository.openAllShowedCards();
         this.cardRepository.resetPairCardAttempList();
+        this.cardRepository.openAllShowedCards();
         this.gameRepository.setGameStatus(GameStatus.stopped);
     }
 }

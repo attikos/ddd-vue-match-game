@@ -16,10 +16,12 @@ watch(() => props.isShowed, (val, oldVal) => {
     if (val && !oldVal) {
         isShowedDelayed.value = true;
     }
-    else if (!val && oldVal) {
+    else {
         setTimeout(() => {
-            isShowedDelayed.value = false;
-        }, 500);
+            if (props.isShowed === val && !val && oldVal) {
+                isShowedDelayed.value = false;
+            }
+        }, 300);
     }
 });
 </script>

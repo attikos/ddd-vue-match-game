@@ -29,12 +29,9 @@ export const useCardStore = defineStore('card', {
                 result[index] = true;
             });
 
-            console.log('result', result);
-
             this.showedCards = result;
         },
         resetShowedCards() {
-            console.trace()
             this.showedCards = {};
         },
         setPairCardAttempList(attemps: PairCardAttempList) {
