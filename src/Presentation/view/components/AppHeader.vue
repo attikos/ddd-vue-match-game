@@ -3,17 +3,17 @@ import { mapUsecase } from '@/Presentation/usecaseMap';
 import { getSavedTheme, setTheme, type Theme } from '@/Presentation/view/utils/theme';
 import { onMounted } from 'vue';
 
-const START_GAME_ANIMATION_DELAY = 500;
 const DEFAULT_THEME = 'cyan';
 
 const startGameUsecase = mapUsecase('StartGameUsecase');
 
 const startHandler = () => {
-    setTimeout(() => startGameUsecase(), START_GAME_ANIMATION_DELAY)
+    startGameUsecase();
 }
 
 const stopHandler = () => {
     // TODO
+    startGameUsecase();
 }
 
 function setThemeHandler(theme: Theme) {

@@ -17,7 +17,6 @@
 
 html {
     &:root {
-
         --primary-hue: 180deg; // default is 'cyan'
         --primary-color: hsl(var(--primary-hue), 72%, 24%);
         --secondary-color: hsl(var(--primary-hue), 95%, 42%);

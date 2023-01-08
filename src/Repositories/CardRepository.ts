@@ -1,5 +1,5 @@
 import { useCardStore } from '@/Data/card.store';
-import type { ShowedCards } from '@/Domain/Card';
+import type { PairCardAttempList, ShowedCards } from '@/Domain/Card';
 
 export class CardRepository {
     private _store: ReturnType<typeof useCardStore>;
@@ -16,15 +16,27 @@ export class CardRepository {
         this.store.setCurrentCards(cards);
     }
 
-    setCardImagesAsset(cards: string[]) {
-        this.store.setCardImagesAsset(cards);
+    setCardImageAsset(cards: string[]) {
+        this.store.setCardImageAsset(cards);
     }
 
     setShowedCards(cards: ShowedCards) {
         this.store.setShowedCards(cards);
     }
 
+    addShowedCards(cards: ShowedCards) {
+        this.store.addShowedCards(cards);
+    }
+
     resetShowedCards() {
-        this.store.setShowedCards({});
+        this.store.resetShowedCards();
+    }
+
+    setPairCardAttempList(attemps: PairCardAttempList) {
+        this.store.setPairCardAttempList(attemps);
+    }
+
+    resetPairCardAttempList() {
+        this.store.resetShowedCards();
     }
 }

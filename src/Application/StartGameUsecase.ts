@@ -1,4 +1,5 @@
 import type { Usecase } from '@/Application/types';
+import { getRandomGameCards } from '@/Domain/Card';
 import type { CardRepository } from '@/Repositories/CardRepository';
 
 export class StartGameUsecase implements Usecase {
@@ -7,13 +8,12 @@ export class StartGameUsecase implements Usecase {
     ) {}
 
     async execute(): Promise<void> {
-        console.log('start game');
+        const cardImageAsset = this.cardRepository.store.cardImageAsset;
 
-        const cardImagesAsset = this.cardRepository.store.cardImagesAsset;
+        this.cardRepository.resetShowedCards();
+        this.cardRepository.resetPairCardAttempList();
 
-        this.cardRepository.setCardImagesAsset(cardImagesAsset);
-
-        const randomCards = [...cardImagesAsset, ...cardImagesAsset].sort(() => (Math.random() > 0.5) ? 1 : -1);
+        const randomCards = getRandomGameCards(cardImageAsset);
         this.cardRepository.setCurrentCards(randomCards);
     }
 }

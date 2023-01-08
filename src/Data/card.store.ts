@@ -1,23 +1,35 @@
 import { defineStore } from 'pinia';
-import type { CardState, ShowedCards } from '@/Domain/Card';
+import type { CardState, PairCardAttempList, ShowedCards } from '@/Domain/Card';
 
 export const useCardStore = defineStore('card', {
     state: (): CardState => ({
-        cardImagesAsset : [],
+        cardImageAsset : [],
         currentCards : [],
         showedCards: {},
-        pairCardAttemps: [],
+        pairCardAttempList: [],
     }),
 
     actions: {
         setCurrentCards(urls: string[]) {
-            this.$patch({currentCards : urls});
+            this.currentCards = urls;
         },
-        setCardImagesAsset(urls: string[]) {
-            this.$patch({cardImagesAsset : urls});
+        setCardImageAsset(urls: string[]) {
+            this.cardImageAsset = urls;
         },
         setShowedCards(cards: ShowedCards) {
-            this.$patch(cards);
-        }
+            this.showedCards = cards;
+        },
+        addShowedCards(cards: ShowedCards) {
+            this.$patch({ showedCards : cards });
+        },
+        resetShowedCards() {
+            this.showedCards = {};
+        },
+        setPairCardAttempList(attemps: PairCardAttempList) {
+            this.pairCardAttempList = attemps;
+        },
+        resetPairCardAttempList() {
+            this.pairCardAttempList = [];
+        },
     }
 });

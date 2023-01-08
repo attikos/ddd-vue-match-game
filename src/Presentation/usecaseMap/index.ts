@@ -1,13 +1,15 @@
 import { CardRepository } from '@/Repositories/CardRepository';
-import { cardImagesAsset } from '@/Domain/Card';
 import { AppStartedUsecase } from '@/Application/AppStartedUsecase';
 import { StartGameUsecase } from '@/Application/StartGameUsecase';
+import { OpenCardUsecase } from '@/Application/OpenCardUsecase';
+import { PairCardAttempListPresenter } from '@/Presentation/presenter/PairCardAttempListPresenter';
+import { ShowedCardsPresenter } from '@/Presentation/presenter/ShowedCardsPresenter';
+import { CardPresenter } from '@/Presentation/presenter/CardPresenter';
 
-const usecaseMap = {
+const usecaseMapping = {
     AppStartedUsecase: (): Promise<void> => {
         const usecase = new AppStartedUsecase(
             new CardRepository(),
-            cardImagesAsset,
         );
 
         return usecase.execute();
@@ -19,9 +21,21 @@ const usecaseMap = {
         );
 
         return usecase.execute();
+    },
+
+    OpenCardUsecase: (index: number): Promise<void> => {
+        const usecase = new OpenCardUsecase(
+            new CardRepository(),
+            index,
+            PairCardAttempListPresenter(),
+            ShowedCardsPresenter(),
+            CardPresenter(),
+        );
+
+        return usecase.execute();
     }
 }
 
-export const mapUsecase = (usecase: keyof typeof usecaseMap) => {
-    return usecaseMap[usecase];
+export const mapUsecase = <T extends keyof typeof usecaseMapping>(usecase: T) => {
+    return usecaseMapping[usecase];
 };
