@@ -29,4 +29,9 @@ html {
         @include theme-color(orange, 28deg);
     }
 }
+
+body {
+    padding: 0;
+    margin: 0;
+}
 </style>

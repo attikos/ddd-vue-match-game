@@ -1,23 +1,21 @@
 import type { Usecase } from '@/Application/types';
-import { getRandomGameCards } from '@/Domain/Card';
 import { GameStatus } from '@/Domain/Game';
 import type { CardRepository } from '@/Repositories/CardRepository';
 import type { GameRepository } from '@/Repositories/GameRepository';
 
-export class StartGameUsecase implements Usecase {
+export class StopGameUsecase implements Usecase {
     constructor(
         private cardRepository: CardRepository,
         private gameRepository: GameRepository
     ) {}
 
     async execute(): Promise<void> {
-        const cardImageAsset = this.cardRepository.store.cardImageAsset;
+        if (this.gameRepository.store.gameStatus === GameStatus.stopped) {
+            return;
+        }
 
-        this.cardRepository.resetShowedCards();
+        this.cardRepository.openAllShowedCards();
         this.cardRepository.resetPairCardAttempList();
-        this.gameRepository.setGameStatus(GameStatus.inProgress);
-
-        const randomCards = getRandomGameCards(cardImageAsset);
-        this.cardRepository.setCurrentCards(randomCards);
+        this.gameRepository.setGameStatus(GameStatus.stopped);
     }
 }

@@ -48,5 +48,11 @@ function openCardHandler(index: number) {
     justify-content: flex-start;
     flex-wrap: wrap;
     margin: 24px auto;
+
+    @media screen and (max-width: 576px) {
+        & {
+            max-width: 254px
+        }
+    }
 }
 </style>

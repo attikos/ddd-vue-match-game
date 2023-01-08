@@ -28,6 +28,10 @@ export class CardRepository {
         this.store.addShowedCards(cards);
     }
 
+    openAllShowedCards() {
+        this.store.openAllShowedCards();
+    }
+
     resetShowedCards() {
         this.store.resetShowedCards();
     }
@@ -37,6 +41,6 @@ export class CardRepository {
     }
 
     resetPairCardAttempList() {
-        this.store.resetShowedCards();
+        this.store.resetPairCardAttempList();
     }
 }

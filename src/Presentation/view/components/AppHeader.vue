@@ -6,14 +6,14 @@ import { onMounted } from 'vue';
 const DEFAULT_THEME = 'cyan';
 
 const startGameUsecase = mapUsecase('StartGameUsecase');
+const stopGameUsecase = mapUsecase('StopGameUsecase');
 
 const startHandler = () => {
     startGameUsecase();
 }
 
 const stopHandler = () => {
-    // TODO
-    startGameUsecase();
+    stopGameUsecase();
 }
 
 function setThemeHandler(theme: Theme) {
@@ -56,6 +56,7 @@ onMounted(() => {
 .header {
     display: block;
     border-bottom: 1px solid #999;
+    padding-bottom: 13px;
 
     &__container {
         display: flex;
@@ -64,10 +65,27 @@ onMounted(() => {
         max-width: 900px;
         margin-left: auto;
         margin-right: auto;
+
+        @media screen and (max-width: 576px) {
+            & {
+                flex-direction: column;
+            }
+        }
     }
 
     &__logo {
         margin-right: 24px;
+        font-size: 18px;
+        line-height: 25px;
+        text-shadow: -2px 4px 4px rgba(0,0,0, 0.2);
+
+        @media screen and (max-width: 576px) {
+            & {
+                margin-right: 0;
+                font-size: 16px;
+                line-height: 22px;
+            }
+        }
     }
 
     &__nav {

@@ -22,7 +22,19 @@ export const useCardStore = defineStore('card', {
         addShowedCards(cards: ShowedCards) {
             this.$patch({ showedCards : cards });
         },
+        openAllShowedCards() {
+            const result: ShowedCards = {};
+
+            this.currentCards.forEach((_, index) => {
+                result[index] = true;
+            });
+
+            console.log('result', result);
+
+            this.showedCards = result;
+        },
         resetShowedCards() {
+            console.trace()
             this.showedCards = {};
         },
         setPairCardAttempList(attemps: PairCardAttempList) {
