@@ -1,9 +1,13 @@
 <script lang="ts" setup>
+import { GameStatus } from '@/Domain/Game';
+import { GamePresenter } from '@/Presentation/presenter/GamePresenter';
 import { mapUsecase } from '@/Presentation/usecaseMap';
 import { getSavedTheme, setTheme, type Theme } from '@/Presentation/view/utils/theme';
 import { onMounted } from 'vue';
 
 const DEFAULT_THEME = 'cyan';
+
+const gameStatus = GamePresenter();
 
 const startGameUsecase = mapUsecase('StartGameUsecase');
 const stopGameUsecase = mapUsecase('StopGameUsecase');
@@ -37,8 +41,17 @@ onMounted(() => {
             </div>
 
             <div class="header__nav">
-                <a @click.prevent="startHandler" class="header__link">Start</a>
-                <a @click.prevent="stopHandler" class="header__link">Stop</a>
+                <a
+                    v-if="gameStatus === GameStatus.stopped"
+                    @click.prevent="startHandler"
+                    class="header__link"
+                >Start</a>
+
+                <a
+                    v-if="gameStatus === GameStatus.inProgress"
+                    @click.prevent="stopHandler"
+                    class="header__link"
+                >Stop</a>
 
                 <a
                     v-for="theme in themeList"
