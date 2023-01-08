@@ -47,6 +47,13 @@ function openCardHandler(index: number) {
 
             <AppModal title="You won!" :isShow="isShowModal" @closed="isShowModal = false"></AppModal>
         </div>
+
+        <div class="footer">
+            <a href="https://github.com/attikos/ddd-vue-match-game" class="footer__link" target="_blank">
+                <img src="../assets/github-mark.png" alt="Github" class="footer__github">
+                <span class="footer__link-text">GitHub @attikos</span>
+            </a>
+        </div>
     </div>
 </template>
 
@@ -62,6 +69,25 @@ function openCardHandler(index: number) {
         & {
             max-width: 254px
         }
+    }
+}
+
+.footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 20px;
+
+    &__link {
+        display: flex;
+    }
+
+    &__github {
+        height: 18px;
+        width: 18px;
+        margin-right: 6px;
+        display: inline-block;
     }
 }
 </style>
