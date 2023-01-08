@@ -1,5 +1,3 @@
-// export type GameStatus = 'inProgress' | 'stopped';
-
 export enum GameStatus {
     inProgress,
     stopped,

@@ -94,6 +94,7 @@ watch(() => props.isShowed, (val, oldVal) => {
 
     &__back {
         background-color: var(--secondary-color);
+        transition: background-color 0.3s ease-in;
         background-image:
         repeating-linear-gradient(
             45deg,
@@ -109,7 +110,6 @@ watch(() => props.isShowed, (val, oldVal) => {
             transparent 0px,
             transparent 20px
         );
-        transition: background-color 0.3s ease-in;
     }
 }
 </style>

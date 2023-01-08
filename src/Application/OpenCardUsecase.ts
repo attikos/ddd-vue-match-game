@@ -40,39 +40,10 @@ export class OpenCardUsecase implements Usecase {
         this.cardRepository.addShowedCards({ [this.index] : true });
 
         if (this.pairCardAttempListRef.value.length === 2) {
-            // let newShowedCards = this.showedCardsRef.value;
-
-            // if (!checkPairCards(this.pairCardAttempListRef.value)) {
-            //     newShowedCards = removeAttempsCards(
-            //         this.showedCardsRef.value,
-            //         this.pairCardAttempListRef.value
-            //     );
-
-            //     resetPairAttemps();
-
-            //     setTimeout(() => {
-            //         if (this.gameStatusRef.value === GameStatus.inProgress) {
-            //             this.cardRepository.setShowedCards(newShowedCards);
-            //         }
-            //     }, DELAY_TO_CLOSE);
-            // }
-            // else {
-            //     const isFinishedGame = checkIsFinish(
-            //         newShowedCards,
-            //         this.cardPresenter.currentCards.value
-            //     );
-
-            //     if (isFinishedGame) {
-            //         alert('You won!');
-            //     }
-            // }
-
             let newShowedCards = this.showedCardsRef.value;
 
             if (!checkPairCards(this.pairCardAttempListRef.value)) {
                 newShowedCards = removeAttempsCards(this.showedCardsRef.value, this.pairCardAttempListRef.value);
-
-                // this.cardRepository.setShowedCards(newShowedCards);
             }
             else {
                 const isFinishedGame = checkIsFinish(
@@ -92,22 +63,6 @@ export class OpenCardUsecase implements Usecase {
                 }
 
                 this.cardRepository.setShowedCards(newShowedCards);
-
-                // if (!checkPairCards(this.pairCardAttempListRef.value)) {
-                //     const newShowedCards = removeAttempsCards(this.showedCardsRef.value, this.pairCardAttempListRef.value);
-
-                //     this.cardRepository.setShowedCards(newShowedCards);
-                // }
-                // else {
-                //     const isFinishedGame = checkIsFinish(
-                //         this.showedCardsRef.value,
-                //         this.cardPresenter.currentCards.value
-                //     );
-
-                //     if (isFinishedGame) {
-                //         alert('You won!');
-                //     }
-                // }
 
                 resetPairAttemps();
             }, DELAY_TO_CLOSE);
