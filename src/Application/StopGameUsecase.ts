@@ -10,12 +10,17 @@ export class StopGameUsecase implements Usecase {
     ) {}
 
     async execute(): Promise<void> {
+        const STOP_GAME_ANIMATION_DELAY = 400;
+
         if (this.gameRepository.store.gameStatus === GameStatus.stopped) {
             return;
         }
 
         this.cardRepository.resetPairCardAttempList();
         this.cardRepository.openAllShowedCards();
-        this.gameRepository.setGameStatus(GameStatus.stopped);
+
+        setTimeout(() => {
+            this.gameRepository.setGameStatus(GameStatus.stopped);
+        }, STOP_GAME_ANIMATION_DELAY)
     }
 }

@@ -4,7 +4,7 @@ import { GameStatus } from '@/Domain/Game';
 
 export const useGameStore = defineStore('game', {
     state: (): GameState => ({
-        gameStatus : GameStatus.stopped,
+        gameStatus : GameStatus.inProgress,
     }),
 
     actions: {
