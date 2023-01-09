@@ -32,21 +32,24 @@ function openCardHandler(index: number) {
 </script>
 
 <template>
-    <div>
+    <div class="page-home">
         <AppHeader></AppHeader>
 
-        <div class="game-content">
-            <GameCard
-                v-for="(image, index) of cardImages"
-                @open-card="openCardHandler(index)"
-                :isFlipped="checkIsShowedCard(index)"
-                :isShowed="checkIsShowedCard(index)"
-                :image="image"
-                :key="index + image"
-            ></GameCard>
+        <transition name="fade" mode="out-in">
+            <div class="game-content" v-show="cardImages.length">
+                <GameCard
+                    v-for="(image, index) of cardImages"
+                    @open-card="openCardHandler(index)"
+                    :isFlipped="checkIsShowedCard(index)"
+                    :isShowed="checkIsShowedCard(index)"
+                    :image="image"
+                    :key="index + image"
+                ></GameCard>
 
-            <AppModal title="You won!" :isShow="isShowModal" @closed="isShowModal = false"></AppModal>
-        </div>
+            </div>
+        </transition>
+
+        <AppModal title="You won!" :isShow="isShowModal" @closed="isShowModal = false"></AppModal>
 
         <div class="footer">
             <a href="https://github.com/attikos/ddd-vue-match-game" class="footer__link" target="_blank">
@@ -58,9 +61,16 @@ function openCardHandler(index: number) {
 </template>
 
 <style lang="scss">
+.page-home {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .game-content {
     display: flex;
     max-width: 506px;
+    min-height: 328px;
     justify-content: flex-start;
     flex-wrap: wrap;
     margin: 24px auto;
@@ -73,7 +83,9 @@ function openCardHandler(index: number) {
 }
 
 .footer {
+    flex-grow: 1;
     display: flex;
+    align-items: flex-end;
     width: 100%;
     justify-content: center;
     margin-top: 32px;

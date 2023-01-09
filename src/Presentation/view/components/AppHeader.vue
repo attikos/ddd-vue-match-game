@@ -36,9 +36,9 @@ onMounted(() => {
 <template>
     <header class="header">
         <div class="header__container">
-            <div class="header__logo">
+            <a href="#/" class="header__logo">
                 <h2>Match Match Game</h2>
-            </div>
+            </a>
 
             <div class="header__nav">
                 <a
@@ -73,7 +73,7 @@ onMounted(() => {
 
     &__container {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         max-width: 900px;
         margin-left: auto;
@@ -88,9 +88,12 @@ onMounted(() => {
 
     &__logo {
         margin-right: 24px;
-        font-size: 18px;
+        font-size: 17px;
+        font-style: italic;
         line-height: 25px;
         text-shadow: -2px 4px 4px rgba(0,0,0, 0.2);
+        text-decoration: none;
+        color: #444;
 
         @media screen and (max-width: 576px) {
             & {
@@ -112,6 +115,8 @@ onMounted(() => {
         color: var(--primary-color);
         font-size: 22px;
         position: relative;
+        height: 22px;
+        line-height: 100%;
         padding: 2px 12px;
         transition: all 0.2s ease-in;
         cursor: pointer;

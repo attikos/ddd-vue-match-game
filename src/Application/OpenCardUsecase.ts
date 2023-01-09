@@ -54,6 +54,7 @@ export class OpenCardUsecase implements Usecase {
                 if (isFinishedGame) {
                     this.cardRepository.setShowedCards(newShowedCards);
                     this.showWonNotification();
+                    this.gameStatusRef.value = GameStatus.stopped;
                 }
             }
 
