@@ -55,8 +55,8 @@ watch(() => props.isShowed, (val, oldVal) => {
     display: flex;
     margin: 6px;
     cursor: pointer;
-    height: 70px;
-    width: 114px;
+    height: 85px;
+    width: 150px;
     transition: transform 0.5s;
     transform-style: preserve-3d;
     flex: 1;
@@ -70,16 +70,16 @@ watch(() => props.isShowed, (val, oldVal) => {
 
     &:hover {
         > .card__back {
-            box-shadow: 0 0 0px 2px rgba(0, 100, 180, 0.5);
+            box-shadow: 4px 2px 0px #de9ddc, -4px -2px 0 #7cf9ff;
         }
     }
 }
 
 .card {
     border-radius: 10px;
-    height: 70px;
-    width: 114px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    height: 85px;
+    width: 150px;
+    box-shadow: 0 0px 0px 1px rgba(255, 255, 255, 0.6);
     backface-visibility: hidden;
     position: absolute;
     top: 0;

@@ -44,13 +44,13 @@ onMounted(() => {
                 <a
                     v-if="gameStatus === GameStatus.stopped"
                     @click.prevent="startHandler"
-                    class="header__link"
+                    class="header__link header__link_type_start"
                 >Start</a>
 
                 <a
                     v-if="gameStatus === GameStatus.inProgress"
                     @click.prevent="stopHandler"
-                    class="header__link"
+                    class="header__link header__link_type_start"
                 >Stop</a>
 
                 <a
@@ -69,7 +69,10 @@ onMounted(() => {
 .header {
     display: block;
     border-bottom: 1px solid #999;
-    padding-bottom: 13px;
+
+    @media screen and (max-width: 768px) {
+        padding-bottom: 13px;
+    }
 
     &__container {
         display: flex;
@@ -79,10 +82,8 @@ onMounted(() => {
         margin-left: auto;
         margin-right: auto;
 
-        @media screen and (max-width: 576px) {
-            & {
-                flex-direction: column;
-            }
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
         }
     }
 
@@ -95,12 +96,10 @@ onMounted(() => {
         text-decoration: none;
         color: #444;
 
-        @media screen and (max-width: 576px) {
-            & {
-                margin-right: 0;
-                font-size: 16px;
-                line-height: 22px;
-            }
+        @media screen and (max-width: 768px) {
+            margin-right: 0;
+            font-size: 16px;
+            line-height: 22px;
         }
     }
 
@@ -132,11 +131,18 @@ onMounted(() => {
         }
 
         &:hover {
-            background: #f0f0f0;
+            text-shadow: 3px 2px 0px #de9ddc, -2px -1px 0 #7cf9ff;
         }
 
         &:active {
-            background: #dcdcdc;
+            color: #000;
+            text-shadow: 1px 1px 0px #de9ddc, -1px -0px 0 #a8fafe;
+        }
+
+        &_type {
+            &_start {
+                min-width: 51px;
+            }
         }
     }
 

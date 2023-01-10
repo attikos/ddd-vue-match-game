@@ -45,7 +45,6 @@ function openCardHandler(index: number) {
                     :image="image"
                     :key="index + image"
                 ></GameCard>
-
             </div>
         </transition>
 
@@ -69,16 +68,14 @@ function openCardHandler(index: number) {
 
 .game-content {
     display: flex;
-    max-width: 506px;
-    min-height: 328px;
-    justify-content: flex-start;
+    max-width: 650px;
+    min-height: 388px;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 24px auto;
 
     @media screen and (max-width: 576px) {
-        & {
-            max-width: 254px
-        }
+        max-width: 100%;
     }
 }
 
