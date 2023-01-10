@@ -5,11 +5,13 @@ import type { CardPresenter } from '@/Presentation/presenter/CardPresenter';
 import type { PairCardAttempListPresenter } from '@/Presentation/presenter/PairCardAttempListPresenter';
 import type { ShowedCardsPresenter } from '@/Presentation/presenter/ShowedCardsPresenter';
 import type { CardRepository } from '@/Repositories/CardRepository';
+import type { GameRepository } from '@/Repositories/GameRepository';
 import type { GamePresenter } from '../Presentation/presenter/GamePresenter';
 
 export class OpenCardUsecase implements Usecase {
     constructor(
         private cardRepository: CardRepository,
+        private gameRepository: GameRepository,
         private index: number,
         private pairCardAttempListRef: ReturnType<typeof PairCardAttempListPresenter>,
         private showedCardsRef: ReturnType<typeof ShowedCardsPresenter>,
@@ -54,7 +56,7 @@ export class OpenCardUsecase implements Usecase {
                 if (isFinishedGame) {
                     this.cardRepository.setShowedCards(newShowedCards);
                     this.showWonNotification();
-                    this.gameStatusRef.value = GameStatus.stopped;
+                    this.gameRepository.setGameStatus(GameStatus.stopped);
                 }
             }
 

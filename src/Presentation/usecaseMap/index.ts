@@ -39,6 +39,7 @@ const usecaseMapping = {
     OpenCardUsecase: (index: number, showWonNotification: () => void): Promise<void> => {
         const usecase = new OpenCardUsecase(
             new CardRepository(),
+            new GameRepository(),
             index,
             PairCardAttempListPresenter(),
             ShowedCardsPresenter(),
