@@ -144,7 +144,7 @@ onMounted(() => {
 
         &_type {
             &_start {
-                min-width: 53px;
+                min-width: 54px;
             }
         }
 
@@ -155,11 +155,15 @@ onMounted(() => {
     }
 
     &__theme {
+        display: flex;
+        align-items: center;
+
         &::before {
+            content: "";
             display: flex;
-            font-size: 40px;
-            line-height: 22px;
-            content: "■";
+            width: 16px;
+            height: 16px;
+            box-sizing: content-box;
         }
     }
 
@@ -167,12 +171,13 @@ onMounted(() => {
         &__theme {
             &--#{$theme} {
                 &::before {
+                    background-color: var(--color-#{$theme});
                     color: var(--color-#{$theme});
                 }
 
                 html.#{$theme} & {
                     &::before {
-                        text-decoration: underline;
+                        box-shadow: 0 0 0 2px currentColor;
                     }
                 }
             }
