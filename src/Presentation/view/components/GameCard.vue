@@ -70,7 +70,7 @@ watch(() => props.isShowed, (val, oldVal) => {
 
     &:hover {
         > .card__back {
-            box-shadow: 4px 2px 0px #de9ddc, -4px -2px 0 #7cf9ff;
+            box-shadow: 4px 2px 0px var(--color-shaddow-first), -4px -2px 0 var(--color-shaddow-second);
         }
     }
 }
@@ -79,7 +79,7 @@ watch(() => props.isShowed, (val, oldVal) => {
     border-radius: 10px;
     height: 85px;
     width: 150px;
-    box-shadow: 0 0px 0px 1px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0px 0px 2px rgba(255, 255, 255, 0.8);
     backface-visibility: hidden;
     position: absolute;
     top: 0;

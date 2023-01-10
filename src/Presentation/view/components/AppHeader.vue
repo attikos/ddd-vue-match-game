@@ -36,9 +36,7 @@ onMounted(() => {
 <template>
     <header class="header">
         <div class="header__container">
-            <a href="#/" class="header__logo">
-                <h2>Match Match Game</h2>
-            </a>
+            <a href="#/" class="header__logo">Match Match Game 🎲</a>
 
             <div class="header__nav">
                 <a
@@ -56,7 +54,7 @@ onMounted(() => {
                 <a
                     v-for="theme in themeList"
                     @click.prevent="setThemeHandler(theme)"
-                    class="header__link"
+                    class="header__link header__theme"
                     :class="`header__theme--${theme}`"
                     :key="theme"
                 ></a>
@@ -67,8 +65,12 @@ onMounted(() => {
 
 <style lang="scss">
 .header {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-bottom: 1px solid #999;
+    background: rgba(255,255,255, 0.2);
+    min-height: 80px;
 
     @media screen and (max-width: 768px) {
         padding-bottom: 13px;
@@ -88,18 +90,19 @@ onMounted(() => {
     }
 
     &__logo {
-        margin-right: 24px;
-        font-size: 17px;
-        font-style: italic;
-        line-height: 25px;
-        text-shadow: -2px 4px 4px rgba(0,0,0, 0.2);
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 34px;
+        margin: 8px 0 8px;
+        margin-right: 50px;
+        text-shadow: 1px 4px 4px rgba(0,0,0, 0.2);
         text-decoration: none;
         color: #444;
 
         @media screen and (max-width: 768px) {
             margin-right: 0;
-            font-size: 16px;
-            line-height: 22px;
+            font-size: 20px;
+            line-height: 32px;
         }
     }
 
@@ -110,10 +113,10 @@ onMounted(() => {
     }
 
     &__link {
+        position: relative;
         text-decoration: none;
         color: var(--primary-color);
         font-size: 22px;
-        position: relative;
         height: 22px;
         line-height: 100%;
         padding: 2px 12px;
@@ -131,18 +134,32 @@ onMounted(() => {
         }
 
         &:hover {
-            text-shadow: 3px 2px 0px #de9ddc, -2px -1px 0 #7cf9ff;
+            text-shadow: 3px 2px 0px var(--color-shaddow-first), -2px -1px 0 var(--color-shaddow-second);
         }
 
         &:active {
             color: #000;
-            text-shadow: 1px 1px 0px #de9ddc, -1px -0px 0 #a8fafe;
+            text-shadow: 1px 1px 0px var(--color-shaddow-first), -1px -0px 0 var(--color-shaddow-second);
         }
 
         &_type {
             &_start {
-                min-width: 51px;
+                min-width: 53px;
             }
+        }
+
+        @media screen and (max-width: 768px) {
+            font-size: 21px;
+            height: 21px;
+        }
+    }
+
+    &__theme {
+        &::before {
+            display: flex;
+            font-size: 40px;
+            line-height: 22px;
+            content: "■";
         }
     }
 
@@ -151,10 +168,6 @@ onMounted(() => {
             &--#{$theme} {
                 &::before {
                     color: var(--color-#{$theme});
-                    display: flex;
-                    font-size: 40px;
-                    line-height: 29px;
-                    content: "■";
                 }
 
                 html.#{$theme} & {
