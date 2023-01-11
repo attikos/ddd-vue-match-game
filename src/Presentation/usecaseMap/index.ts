@@ -2,12 +2,8 @@ import { CardRepository } from '@/Repositories/CardRepository';
 import { AppStartedUsecase } from '@/Application/AppStartedUsecase';
 import { StartGameUsecase } from '@/Application/StartGameUsecase';
 import { OpenCardUsecase } from '@/Application/OpenCardUsecase';
-import { PairCardAttempListPresenter } from '@/Presentation/presenter/PairCardAttempListPresenter';
-import { ShowedCardsPresenter } from '@/Presentation/presenter/ShowedCardsPresenter';
-import { CardPresenter } from '@/Presentation/presenter/CardPresenter';
 import { GameRepository } from '@/Repositories/GameRepository';
 import { StopGameUsecase } from '@/Application/StopGameUsecase';
-import { GamePresenter } from '@/Presentation/presenter/GamePresenter';
 
 const usecaseMapping = {
     AppStartedUsecase: (): Promise<void> => {
@@ -38,13 +34,9 @@ const usecaseMapping = {
 
     OpenCardUsecase: (index: number, showWonNotification: () => void): Promise<void> => {
         const usecase = new OpenCardUsecase(
+            index,
             new CardRepository(),
             new GameRepository(),
-            index,
-            PairCardAttempListPresenter(),
-            ShowedCardsPresenter(),
-            CardPresenter(),
-            GamePresenter(),
             showWonNotification,
         );
 

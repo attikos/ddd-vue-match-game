@@ -5,7 +5,7 @@ import { mapUsecase } from '@/Presentation/usecaseMap';
 import { getSavedTheme, setTheme, type Theme } from '@/Presentation/view/utils/theme';
 import { onMounted } from 'vue';
 
-const DEFAULT_THEME = 'cyan';
+const DEFAULT_THEME = 'yellow';
 
 const gameStatus = GamePresenter();
 
@@ -24,7 +24,7 @@ function setThemeHandler(theme: Theme) {
     setTheme(theme);
 }
 
-const themeList: Theme[] = ['cyan', 'green', 'blue', 'purple', 'red', 'orange'];
+const themeList: Theme[] = ['cyan', 'green', 'blue', 'purple', 'red', 'yellow'];
 
 onMounted(() => {
     startGameUsecase();
@@ -68,7 +68,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid var(--border-color);
     background: rgba(255,255,255, 0.2);
     min-height: 80px;
 
@@ -115,7 +115,7 @@ onMounted(() => {
     &__link {
         position: relative;
         text-decoration: none;
-        color: var(--primary-color);
+        color: var(--text-color);
         font-size: 22px;
         height: 22px;
         line-height: 100%;
@@ -189,6 +189,6 @@ onMounted(() => {
     @include theme-link('blue');
     @include theme-link('purple');
     @include theme-link('red');
-    @include theme-link('orange');
+    @include theme-link('yellow');
 }
 </style>

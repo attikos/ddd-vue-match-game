@@ -32,6 +32,7 @@ watch(() => props.isShowed, (val, oldVal) => {
             class="card-wrapper"
             :class="{ 'card-wrapper--flipped' : props.isFlipped }"
             @click="emit('openCard')"
+            tabindex="0"
         >
             <div class="card card__back"></div>
 
@@ -71,6 +72,12 @@ watch(() => props.isShowed, (val, oldVal) => {
     &:hover {
         > .card__back {
             box-shadow: 4px 2px 0px var(--color-shaddow-first), -4px -2px 0 var(--color-shaddow-second);
+        }
+    }
+
+    &:focus-visible {
+        > .card__back {
+            box-shadow: 0 0px 0px 3px #765ec8;
         }
     }
 }

@@ -1,4 +1,4 @@
-export type Theme = 'cyan' | 'green' | 'blue' | 'purple' | 'red' | 'orange';
+export type Theme = 'cyan' | 'green' | 'blue' | 'purple' | 'red' | 'yellow';
 
 export const setTheme = (theme: Theme) => {
     const htmpEl = document.getElementsByTagName('html')[0];

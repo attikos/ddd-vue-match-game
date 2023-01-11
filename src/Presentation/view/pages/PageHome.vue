@@ -15,6 +15,7 @@ const currentCards = cardPresenter.currentCards;
 const cardImages = computed(() => currentCards.value.map(img => getImageUrl(img)));
 
 const openCardUsecase = mapUsecase('OpenCardUsecase');
+const startGameUsecase = mapUsecase('StartGameUsecase');
 
 const checkIsShowedCard = (index: number): boolean => {
     return _checkIsShowedCard(showedCards.value, index);
@@ -28,6 +29,11 @@ function showWonNotification() {
 
 function openCardHandler(index: number) {
     openCardUsecase(index, showWonNotification);
+}
+
+function closeModalHandler() {
+    isShowModal.value = false;
+    startGameUsecase();
 }
 </script>
 
@@ -48,7 +54,7 @@ function openCardHandler(index: number) {
             </div>
         </transition>
 
-        <AppModal title="You won!" :isShow="isShowModal" @closed="isShowModal = false"></AppModal>
+        <AppModal title="You won!" :isShow="isShowModal" @closed="closeModalHandler"></AppModal>
 
         <div class="footer">
             <a href="https://github.com/attikos/ddd-vue-match-game" class="footer__link" target="_blank">

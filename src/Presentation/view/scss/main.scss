@@ -1,6 +1,6 @@
 @mixin theme-color($name, $hue) {
     --hue-#{"" + $name}: #{$hue};
-    --color-#{"" + $name}: #{'hsl(var(--hue-#{$name}), 72%, 24%)'};
+    --color-#{"" + $name}: #{'hsl(var(--hue-#{$name}), 71%, 46%)'};
 
     &.#{"" + $name} {
         --primary-hue: var(--hue-#{$name});
@@ -9,18 +9,25 @@
 
 html {
     &:root {
-        --color-shaddow-first: #f7c7f5;
-        --color-shaddow-second: #bef4f7;
-        --primary-hue: 180deg; // default is 'cyan'
-        --primary-color: hsl(var(--primary-hue), 72%, 24%);
-        --secondary-color: hsl(var(--primary-hue), 95%, 42%);
+        --text-color: #444;
+        --border-color: #999;
+        --main-bg-color: #b1ddf8;
+        --color-shaddow-first: #ff98fc;
+        --color-shaddow-second: #5af7ff;
+        --primary-hue: 58deg;
+        --primary-color: hsl(var(--primary-hue), 72%, 44%);
+        --secondary-color: hsl(var(--primary-hue), 70%, 60%);
+        --button-text-color: #fff;
+        --button-bg-color: var(--primary-color);
+        --button-text-color-hover: #ddd;
+        --button-text-color-active: #ccc;
 
         @include theme-color(cyan, 180deg);
         @include theme-color(green, 115deg);
         @include theme-color(blue, 200deg);
         @include theme-color(purple, 280deg);
-        @include theme-color(red, 12deg);
-        @include theme-color(orange, 28deg);
+        @include theme-color(red, 5deg);
+        @include theme-color(yellow, 58deg);
     }
 }
 
@@ -29,25 +36,25 @@ body {
     padding: 0;
     margin: 0;
     background: url(../assets/bg-8-bit-nature.jpg) no-repeat center;
-    background-color: #f9f5ea;
+    background-color: var(--main-bg-color);
     background-size: cover;
 }
 
 .btn {
-    color: #fff;
+    color: var(--button-text-color);
     background: var(--primary-color);
     padding: 6px 12px;
     font-size: 16px;
     cursor: pointer;
-    border: 1px solid #999;
+    border: 1px solid var(--border-color);
     display: inline-block;
     min-width: 96px;
 
     &:hover {
-        color: #ddd;
+        color: var(--button-text-color-hover);
     }
 
     &:active {
-        color: #ccc;
+        color: var(--button-text-color-active);
     }
 }

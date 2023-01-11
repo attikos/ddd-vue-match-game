@@ -1,56 +1,60 @@
 import type { Usecase } from '@/Application/types';
 import { addCardAttemps, checkPairCards, checkIsFinish, removeAttempsCards, checkIsShowedCard } from '@/Domain/Card';
 import { GameStatus } from '@/Domain/Game';
-import type { CardPresenter } from '@/Presentation/presenter/CardPresenter';
-import type { PairCardAttempListPresenter } from '@/Presentation/presenter/PairCardAttempListPresenter';
-import type { ShowedCardsPresenter } from '@/Presentation/presenter/ShowedCardsPresenter';
 import type { CardRepository } from '@/Repositories/CardRepository';
 import type { GameRepository } from '@/Repositories/GameRepository';
-import type { GamePresenter } from '../Presentation/presenter/GamePresenter';
 
 export class OpenCardUsecase implements Usecase {
     constructor(
+        private index: number,
         private cardRepository: CardRepository,
         private gameRepository: GameRepository,
-        private index: number,
-        private pairCardAttempListRef: ReturnType<typeof PairCardAttempListPresenter>,
-        private showedCardsRef: ReturnType<typeof ShowedCardsPresenter>,
-        private cardPresenter: ReturnType<typeof CardPresenter>,
-        private gameStatusRef: ReturnType<typeof GamePresenter>,
         private showWonNotification: () => void,
     ) {}
 
     async execute(): Promise<void> {
         const DELAY_TO_CLOSE = 1000;
         const resetPairAttemps = () => this.cardRepository.setPairCardAttempList([]);
+        const { showedCards } = this.cardRepository.store;
 
-        if (checkIsShowedCard(this.showedCardsRef.value, this.index)) {
+        if (checkIsShowedCard(showedCards, this.index)) {
             return;
         }
 
-        if (this.pairCardAttempListRef.value.length >= 2) {
+        let { pairCardAttempList } = this.cardRepository.store;
+
+        if (pairCardAttempList.length >= 2) {
             return;
         }
+
+        const { currentCards } = this.cardRepository.store;
 
         const cardAttemps = addCardAttemps(
-            this.pairCardAttempListRef.value,
-            this.cardPresenter.currentCards.value,
+            pairCardAttempList,
+            currentCards,
             this.index
         );
 
         this.cardRepository.setPairCardAttempList(cardAttemps);
+        pairCardAttempList = this.cardRepository.store.pairCardAttempList;
+
         this.cardRepository.addShowedCards({ [this.index] : true });
 
-        if (this.pairCardAttempListRef.value.length === 2) {
-            let newShowedCards = this.showedCardsRef.value;
+        if (pairCardAttempList.length === 2) {
+            let newShowedCards = this.cardRepository.store.showedCards;
 
-            if (!checkPairCards(this.pairCardAttempListRef.value)) {
-                newShowedCards = removeAttempsCards(this.showedCardsRef.value, this.pairCardAttempListRef.value);
+            if (!checkPairCards(pairCardAttempList)) {
+                newShowedCards = removeAttempsCards(
+                    showedCards,
+                    pairCardAttempList
+                );
             }
             else {
+                const { currentCards } = this.cardRepository.store;
+
                 const isFinishedGame = checkIsFinish(
-                    this.showedCardsRef.value,
-                    this.cardPresenter.currentCards.value
+                    showedCards,
+                    currentCards
                 );
 
                 if (isFinishedGame) {
@@ -61,7 +65,9 @@ export class OpenCardUsecase implements Usecase {
             }
 
             setTimeout(() => {
-                if (this.gameStatusRef.value === GameStatus.stopped) {
+                const { gameStatus } = this.gameRepository.store;
+
+                if (gameStatus === GameStatus.stopped) {
                     return;
                 }
 
