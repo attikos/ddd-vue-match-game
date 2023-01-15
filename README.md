@@ -5,30 +5,30 @@ Used: Typescript, Vue 3, Pinia
 Flow of controls:
 
 ```
-                         USER
-                             ↓
-                        UI (Vue)     ←   Presentor
-                             ↓                        ↑
-(entities)        (usecases)         (State, Pinia)   
- Domain  →  Application              Data
-                            ↓                         ↓ ↑
-                  Adapters (Driven)  → Repository
-                            ↓                          
-                   Infrastructure  ←  API, etc.   
+                  USER
+                    ↓
+                UI (Vue)     ←     Presentor
+                    ↓                  ↑
+(entities)      (usecases)      (State, Pinia)   
+ Domain     →  Application           Data
+                    ↓                 ↓ ↑
+            Adapters (Driven)  →  Repository
+                    ↓                          
+            Infrastructure  ←  API, etc.   
 ```
 
 Dependencies:
 ```
-                           USER
-                               ↓
-                          UI (Vue)      ←     Presentor
-                               ↓                          ↑
-(entities)          (usecases)          (State, Pinia)
- Domain    ←  Application                Data
-                              ↑                           ↓
-                  Adapters (Driven)  ←  Repository
-                              ↑               
-                   Infrastructure  ←  API, etc.      
+                  USER
+                    ↓
+                UI (Vue)     ←    Presentor
+                    ↓                 ↑
+(entities)      (usecases)      (State, Pinia)  
+ Domain     ←  Application           Data
+                    ↑                 ↓
+            Adapters (Driven)  ←  Repository
+                    ↑               
+            Infrastructure  ←  API, etc.   
 ```
 
 ## Project Setup
