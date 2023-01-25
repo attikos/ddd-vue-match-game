@@ -1,10 +1,11 @@
+import { useCardStore } from '@/Data/card.store';
 import type { PairCardAttempList, ShowedCards } from '@/Domain/Card';
 
 export class CardRepository {
-    private _store: any;
+    private _store: ReturnType<typeof useCardStore>;
 
     constructor() {
-        this._store = {};
+        this._store = useCardStore();
     }
 
     get store() {

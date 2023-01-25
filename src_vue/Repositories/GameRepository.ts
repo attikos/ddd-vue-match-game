@@ -1,10 +1,11 @@
+import { useGameStore } from '@/Data/game.store';
 import type { GameStatus } from '@/Domain/Game';
 
 export class GameRepository {
-    private _store: any;
+    private _store: ReturnType<typeof useGameStore>;
 
     constructor() {
-        this._store = {}
+        this._store = useGameStore();
     }
 
     get store() {
