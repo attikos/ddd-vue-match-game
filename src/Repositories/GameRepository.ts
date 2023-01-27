@@ -1,4 +1,4 @@
-import type { GameStatus } from '@/Domain/Game';
+import type { GameStatus } from 'src/Domain/Game';
 
 export class GameRepository {
     private _store: any;

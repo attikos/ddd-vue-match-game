@@ -27,20 +27,20 @@ watch(() => props.isShowed, (val, oldVal) => {
 </script>
 
 <template>
-    <div class="card-parent">
+    <div className="card-parent">
         <div
-            class="card-wrapper"
-            :class="{ 'card-wrapper--flipped' : props.isFlipped }"
+            className="card-wrapper"
+            :className="{ 'card-wrapper--flipped' : props.isFlipped }"
             @click="emit('openCard')"
             tabindex="0"
         >
-            <div class="card card__back"></div>
+            <div className="card card__back"></div>
 
             <img
                 v-if="isShowedDelayed"
                 :src="props.image"
                 alt=""
-                class="card card__front"
+                className="card card__front"
             />
         </div>
     </div>

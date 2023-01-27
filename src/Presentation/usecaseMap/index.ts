@@ -1,9 +1,9 @@
-import { CardRepository } from '@/Repositories/CardRepository';
-import { AppStartedUsecase } from '@/Application/AppStartedUsecase';
-import { StartGameUsecase } from '@/Application/StartGameUsecase';
-import { OpenCardUsecase } from '@/Application/OpenCardUsecase';
-import { GameRepository } from '@/Repositories/GameRepository';
-import { StopGameUsecase } from '@/Application/StopGameUsecase';
+import { CardRepository } from 'src/Repositories/CardRepository';
+import { AppStartedUsecase } from 'src/Application/AppStartedUsecase';
+import { StartGameUsecase } from 'src/Application/StartGameUsecase';
+import { OpenCardUsecase } from 'src/Application/OpenCardUsecase';
+import { GameRepository } from 'src/Repositories/GameRepository';
+import { StopGameUsecase } from 'src/Application/StopGameUsecase';
 
 const usecaseMapping = {
     AppStartedUsecase: (): Promise<void> => {

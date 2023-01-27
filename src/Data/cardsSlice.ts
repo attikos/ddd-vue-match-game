@@ -1,4 +1,4 @@
-import type { CardState, PairCardAttempList, ShowedCards } from '@/Domain/Card';
+import type { CardState, PairCardAttempList, ShowedCards } from 'src/Domain/Card';
 import { createSlice } from '@reduxjs/toolkit';
 
 const getInitialState = (): CardState => ({

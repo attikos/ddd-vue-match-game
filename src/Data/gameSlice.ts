@@ -1,4 +1,4 @@
-import { GameState, GameStatus } from '@/Domain/Game';
+import { GameState, GameStatus } from 'src/Domain/Game';
 import { createSlice } from '@reduxjs/toolkit';
 
 const getInitialState = (): GameState => ({

@@ -1,4 +1,4 @@
-import type { PairCardAttempList, ShowedCards } from '@/Domain/Card';
+import type { PairCardAttempList, ShowedCards } from 'src/Domain/Card';
 
 export class CardRepository {
     private _store: any;

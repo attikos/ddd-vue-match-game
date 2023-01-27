@@ -1,8 +1,8 @@
-import type { Usecase } from '@/Application/types';
-import { addCardAttemps, checkPairCards, checkIsFinish, removeAttempsCards, checkIsShowedCard } from '@/Domain/Card';
-import { GameStatus } from '@/Domain/Game';
-import type { CardRepository } from '@/Repositories/CardRepository';
-import type { GameRepository } from '@/Repositories/GameRepository';
+import type { Usecase } from 'src/Application/types';
+import { addCardAttemps, checkPairCards, checkIsFinish, removeAttempsCards, checkIsShowedCard } from 'src/Domain/Card';
+import { GameStatus } from 'src/Domain/Game';
+import type { CardRepository } from 'src/Repositories/CardRepository';
+import type { GameRepository } from 'src/Repositories/GameRepository';
 
 export class OpenCardUsecase implements Usecase {
     constructor(

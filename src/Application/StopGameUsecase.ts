@@ -1,7 +1,7 @@
-import type { Usecase } from '@/Application/types';
-import { GameStatus } from '@/Domain/Game';
-import type { CardRepository } from '@/Repositories/CardRepository';
-import type { GameRepository } from '@/Repositories/GameRepository';
+import type { Usecase } from 'src/Application/types';
+import { GameStatus } from 'src/Domain/Game';
+import type { CardRepository } from 'src/Repositories/CardRepository';
+import type { GameRepository } from 'src/Repositories/GameRepository';
 
 export class StopGameUsecase implements Usecase {
     constructor(

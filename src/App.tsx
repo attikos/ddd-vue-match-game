@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.css';
-import PageHome from '@/Presentation/view/pages/PageHome';
+import PageHome from 'src/Presentation/view/pages/PageHome';
 
 function App() {
     return (

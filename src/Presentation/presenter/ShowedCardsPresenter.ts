@@ -1,4 +1,4 @@
-import type { ShowedCards } from '@/Domain/Card';
+import type { ShowedCards } from 'src/Domain/Card';
 
 export function ShowedCardsPresenter(): any {
     // const { showedCards } = useCardStore();

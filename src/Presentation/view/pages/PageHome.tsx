@@ -1,12 +1,13 @@
+import AppHeader from 'src/Presentation/view/components/AppHeader/AppHeader';
 import React, { useState } from 'react';
-// import { checkIsShowedCard as _checkIsShowedCard } from '@/Domain/Card';
-// import { CardPresenter } from '@/Presentation/presenter/CardPresenter';
-// import { ShowedCardsPresenter } from '@/Presentation/presenter/ShowedCardsPresenter';
-// import { mapUsecase } from '@/Presentation/usecaseMap';
-// import AppHeader from '@/Presentation/view/components/AppHeader.vue';
-// import AppModal from '@/Presentation/view/components/AppModal.vue';
-// import GameCard from '@/Presentation/view/components/GameCard.vue';
-// import { getImageUrl } from '@/Presentation/view/utils/get-image-url';
+// import { checkIsShowedCard as _checkIsShowedCard } from 'src/Domain/Card';
+// import { CardPresenter } from 'src/Presentation/presenter/CardPresenter';
+// import { ShowedCardsPresenter } from 'src/Presentation/presenter/ShowedCardsPresenter';
+// import { mapUsecase } from 'src/Presentation/usecaseMap';
+// import AppHeader from 'src/Presentation/view/components/AppHeader.vue';
+// import AppModal from 'src/Presentation/view/components/AppModal.vue';
+// import GameCard from 'src/Presentation/view/components/GameCard.vue';
+// import { getImageUrl } from 'src/Presentation/view/utils/get-image-url';
 
 // const cardPresenter = CardPresenter();
 // const showedCards = ShowedCardsPresenter();
@@ -21,14 +22,14 @@ import React, { useState } from 'react';
 // }
 
 const PageHome = (): JSX.Element => {
-    // const [isShowModal, setIsShowModal] = useState(false);
+    const [isShowModal, setIsShowModal] = useState(false);
 
     // function showWonNotification() {
     //     setIsShowModal(true);
     // }
 
     // function openCardHandler(index: number) {
-    //     openCardUsecase(index, showWonNotification);
+    //     openCardUsecase(index, showWonNotificatpresenter/GamePresenter.tsion);
     // }
 
     // function closeModalHandler() {
@@ -38,7 +39,7 @@ const PageHome = (): JSX.Element => {
 
     return (
         <div className="page-home">
-            {/* <AppHeader></AppHeader> */}
+            <AppHeader></AppHeader>
 
             {/* <transition name="fade" mode="out-in"> */}
             {/* <div className="game-content" v-show="cardImages.length"> */}
