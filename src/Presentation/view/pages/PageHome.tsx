@@ -1,41 +1,43 @@
 import AppHeader from 'src/Presentation/view/components/AppHeader/AppHeader';
 import React, { useState } from 'react';
+import AppModal from 'src/Presentation/view/components/AppModal/AppModal';
+import { mapUsecase } from '@/Presentation/usecaseMap';
 // import { checkIsShowedCard as _checkIsShowedCard } from 'src/Domain/Card';
 // import { CardPresenter } from 'src/Presentation/presenter/CardPresenter';
 // import { ShowedCardsPresenter } from 'src/Presentation/presenter/ShowedCardsPresenter';
 // import { mapUsecase } from 'src/Presentation/usecaseMap';
 // import AppHeader from 'src/Presentation/view/components/AppHeader.vue';
-// import AppModal from 'src/Presentation/view/components/AppModal.vue';
-// import GameCard from 'src/Presentation/view/components/GameCard.vue';
-// import { getImageUrl } from 'src/Presentation/view/utils/get-image-url';
+import GameCard from 'src/Presentation/view/components/GameCard/GameCard';
+import { getImageUrl } from 'src/Presentation/view/utils/get-image-url';
 
-// const cardPresenter = CardPresenter();
-// const showedCards = ShowedCardsPresenter();
-// const currentCards = cardPresenter.currentCards;
-// const cardImages = computed(() => currentCards.value.map(img => getImageUrl(img)));
-
-// const openCardUsecase = mapUsecase('OpenCardUsecase');
-// const startGameUsecase = mapUsecase('StartGameUsecase');
 
 // const checkIsShowedCard = (index: number): boolean => {
 // return _checkIsShowedCard(showedCards.value, index);
 // }
 
 const PageHome = (): JSX.Element => {
+    const startGameUsecase = mapUsecase('StartGameUsecase');
+    const openCardUsecase = mapUsecase('OpenCardUsecase');
     const [isShowModal, setIsShowModal] = useState(false);
 
-    // function showWonNotification() {
-    //     setIsShowModal(true);
-    // }
+    // const cardPresenter = CardPresenter();
+    // const showedCards = ShowedCardsPresenter();
+    // const currentCards = cardPresenter.currentCards;
+    // const cardImages = computed(() => currentCards.value.map(img => getImageUrl(img)));
 
-    // function openCardHandler(index: number) {
-    //     openCardUsecase(index, showWonNotificatpresenter/GamePresenter.tsion);
-    // }
 
-    // function closeModalHandler() {
-    //     setIsShowModal(false);
-    //     startGameUsecase();
-    // }
+    function showWonNotification() {
+        setIsShowModal(true);
+    }
+
+    function openCardHandler(index: number) {
+        openCardUsecase(index, showWonNotification);
+    }
+
+    function closeModalHandler() {
+        setIsShowModal(false);
+        startGameUsecase();
+    }
 
     return (
         <div className="page-home">
@@ -43,18 +45,22 @@ const PageHome = (): JSX.Element => {
 
             {/* <transition name="fade" mode="out-in"> */}
             {/* <div className="game-content" v-show="cardImages.length"> */}
-            {/* <GameCard
-                        v-for="(image, index) of cardImages"
-                        @open-card="openCardHandler(index)"
-                        :isFlipped="checkIsShowedCard(index)"
-                        :isShowed="checkIsShowedCard(index)"
-                        :image="image"
-                        :key="index + image"
-                    ></GameCard> */}
-            {/* </div> */}
+            { cardImages.map((image, index) => {
+                return (
+                    <GameCard
+                        openCard={() => openCardHandler(index)}
+                        isFlipped={checkIsShowedCard(index)}
+                        isShowed={checkIsShowedCard(index)}
+                        image={image}
+                        key={index + image}
+                    ></GameCard>
+                );
+            })}
+
+            {/* </div>
             {/* </transition> */}
 
-            {/* <AppModal title="You won!" :isShow="isShowModal" @closed="closeModalHandler"></AppModal> */}
+            <AppModal title="You won!" isShow={isShowModal} onClose={closeModalHandler}></AppModal>
 
             <div className="footer">
                 <a href="https://github.com/attikos/ddd-vue-match-game" className="footer__link" target="_blank" rel="noreferrer">
