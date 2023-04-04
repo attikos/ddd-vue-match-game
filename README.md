@@ -1,5 +1,6 @@
-# Clean code. Domain Driven Design with Vue 3
-Used: Typescript, Vue 3, Pinia
+# WIP / Draft
+# Clean code. Domain Driven Design with React
+Used: Typescript, React
 
 ### Layers
 Flow of controls:
@@ -7,9 +8,9 @@ Flow of controls:
 ```
                   USER
                     ↓
-                UI (Vue)     ←     Presentor
+                   UI        ←     Presentor
                     ↓                  ↑
-(entities)      (usecases)      (State, Pinia)   
+(entities)      (usecases)         (State)   
  Domain     →  Application           Data
                     ↓                 ↓ ↑
             Adapters (Driven)  →  Repository
@@ -21,9 +22,9 @@ Dependencies:
 ```
                   USER
                     ↓
-                UI (Vue)     ←    Presentor
+                    UI        ←    Presentor
                     ↓                 ↑
-(entities)      (usecases)      (State, Pinia)  
+(entities)      (usecases)         (State)  
  Domain     ←  Application           Data
                     ↑                 ↓
             Adapters (Driven)  ←  Repository
